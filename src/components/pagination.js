@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
 
 export const Pagination = ({ repo, page, handleClick }) => {
   const pageTotal = Math.floor(repo.open_issues_count / 30);
@@ -11,7 +10,7 @@ export const Pagination = ({ repo, page, handleClick }) => {
           PREV
         </div>
         : <div className="hidden-button"></div>}
-      <div>Page {page} of {pageTotal}</div>
+      {pageTotal ? <div>Page {page} of {pageTotal}</div> : null}
       {page !== pageTotal ?
         <div className="button" onClick={handleClick.bind(this, page + 1)}>
           NEXT

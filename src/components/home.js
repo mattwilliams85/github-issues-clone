@@ -11,29 +11,29 @@ export default class Home extends Component {
   }
 
   render() {
-    const { repo, issues } = this.props;
+    const { repo, issues, isLoading } = this.props;
     const { characterLimit } = this;
 
     return (
       <div className="Home--root">
         <div className="mask"></div>
-        {!issues.length ?
+        <h1>
+          {repo.name}
+          {` / `}
+          <Link to="/">
+            <i className="material-icons info-icon">info_outline</i>
+            {` issues `}
+          </Link>
+        </h1>
+
+        <PaginationContainer />
+
+        {isLoading ?
           <div className="loader-wrap">
             <div className="loader"></div>
           </div>
           :
           <div>
-            <h1>
-              {repo.name}
-              {` / `}
-              <Link to="/">
-                <i className="material-icons info-icon">info_outline</i>
-                {` issues `}
-              </Link>
-            </h1>
-            
-            <PaginationContainer />
-
             <div className="issue-wrap">
             {issues.map((issue) => {
               const { title, labels, number, user, body } = issue;
@@ -74,7 +74,9 @@ export default class Home extends Component {
               );
             })}
             </div>
+
             <PaginationContainer />
+
           </div>
           }
       </div>
@@ -84,5 +86,6 @@ export default class Home extends Component {
 
 Home.propTypes = {
   repo: PropTypes.object.isRequired,
-  issues: PropTypes.array.isRequired
+  issues: PropTypes.array.isRequired,
+  isLoading: PropTypes.boolean
 };

@@ -1,6 +1,12 @@
 import 'whatwg-fetch';
 import * as type from './types';
 
+export const loadStart = () => {
+  return {
+    type: type.LOADING_START
+  };
+};
+
 export const getIssueSuccess = (json) => {
   return {
     type: type.GET_ISSUE_SUCCEEDED,
@@ -49,6 +55,8 @@ export const getIssue = (id) => {
   const url = `https://api.github.com/repos/nodejs/node/issues/${id}`;
  
   return (dispatch) => {
+    dispatch(loadStart());
+    
     fetch(url)
       .then((response) => {
         return response.json();
@@ -79,6 +87,7 @@ export const fetchIssues = (page = 1) => {
   const url = `https://api.github.com/repos/nodejs/node/issues?page=${page}`;
 
   return (dispatch) => {
+    dispatch(loadStart());
     dispatch(changePage(page));
 
     fetch(url)

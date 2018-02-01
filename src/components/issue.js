@@ -9,14 +9,14 @@ export class Issue extends Component {
   }
 
   render() {
-    const { repo, issue } = this.props;
+    const { repo, issue, isLoading } = this.props;
     const { title, labels, number, user, body, comments } = issue;
     const { login, avatar_url } = user;
 
     return (
       <div className="Issue--root">
         <div className="mask"></div>
-        {!issue.title ?
+        {isLoading ?
           <div className="loader-wrap">
             <div className="loader"></div>
           </div>
@@ -83,6 +83,7 @@ export class Issue extends Component {
 Issue.propTypes = {
   issue: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
-  repo: PropTypes.object.isRequired
+  repo: PropTypes.object.isRequired,
+  isLoading: PropTypes.boolean
 };
 

@@ -5,7 +5,8 @@ import { getIssue } from '../redux/actions/issues';
 export function mapStateToProps(state) {
   return {
     issue: state.issues.issue,
-    repo: state.issues.repo
+    repo: state.issues.repo,
+    isLoading: state.issues.isLoading
   };
 }
 

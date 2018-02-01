@@ -5,7 +5,7 @@ import tinycolor from 'tinycolor2';
 
 export default class Home extends Component {
   characterLimit(n, string) {
-    return string.length > n 
+    return string.length > n
       ? `${string.substring(0, n).trim()}...`
       : string;
   }
@@ -84,5 +84,5 @@ export default class Home extends Component {
 
 Home.propTypes = {
   repo: PropTypes.object.isRequired,
-  issues: PropTypes.array.isRequired,
+  issues: PropTypes.array.isRequired
 };

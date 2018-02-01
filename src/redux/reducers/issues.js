@@ -4,8 +4,7 @@ const initialState = {
   entities: [],
   issue: { user: {}, labels: [], comments: [] },
   repo: {},
-  page: 1,
-  isLoading: false
+  page: 1
 };
 
 export function issues(state = initialState, action) {
@@ -18,10 +17,6 @@ export function issues(state = initialState, action) {
       return { ...state, issue: action.payload };
     case type.FETCH_REPO_SUCCEEDED:
       return { ...state, repo: action.payload };
-    case type.LOADING_START:
-      return { ...state, isLoading: true };
-    case type.LOADING_END:
-      return { ...state, isLoading: false };
     default:
       return state;
   }

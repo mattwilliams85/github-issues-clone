@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import HomeContainer from './containers/homeContainer';
 import { connect } from 'react-redux';
 import { fetchIssues, fetchRepo } from './redux/actions/issues';
 

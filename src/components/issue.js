@@ -9,11 +9,10 @@ export class Issue extends Component {
   }
 
   render() {
-    const { repo, issue, isLoading } = this.props;
+    const { repo, issue } = this.props;
     const { title, labels, number, user, body, comments } = issue;
-    console.log('isssue', this.props.issue)
     const { login, avatar_url } = user;
-    console.log('LOAD STATE', isLoading)
+
     return (
       <div className="Issue--root">
         <div className="mask"></div>
@@ -65,9 +64,9 @@ export class Issue extends Component {
             </div>
 
             { comments.lengt ? <h3>Comments</h3> : null }
-            {comments.map((comment) => {
+            {comments.map((comment, index) => {
               return (
-                <div className="issue comment">
+                <div key={index} className="issue comment">
                   {comment.body}
                   <img className="gravatar" src={comment.user.avatar_url} alt="gravatar" />
                 </div>
@@ -84,6 +83,6 @@ export class Issue extends Component {
 Issue.propTypes = {
   issue: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
-  repo: PropTypes.object.isRequired,
+  repo: PropTypes.object.isRequired
 };
 

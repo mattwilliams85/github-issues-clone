@@ -11,6 +11,7 @@ body {
   display: flex;
   justify-content: center;
   margin: 0;
+  padding: 0 0 50px 0;
 }
 
 a {
@@ -19,7 +20,7 @@ a {
   transition: color .3s;
 
   &:hover {
-    color: #0366d6;
+    color: #00fbff;
   }
 }
 
@@ -166,11 +167,14 @@ a {
     div:first-child {
       margin-top: 0;
     }
+
+    a:hover {
+      color: #0366d6;
+    }
   }
 }
 
 // LOADER
-
 .loader-wrap {
     display: flex;
     flex-direction: column;

@@ -3,7 +3,6 @@ import { Issue } from '../components/issue';
 import { getIssue } from '../redux/actions/issues';
 
 export function mapStateToProps(state) {
-
   return {
     issue: state.issues.issue,
     repo: state.issues.repo

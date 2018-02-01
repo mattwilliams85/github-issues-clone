@@ -17,14 +17,16 @@ export default class Home extends Component {
     return (
       <div className="Home--root">
         <div className="mask"></div>
-        <h1>
-          {repo.name}
-          {` / `}
-          <Link to="/">
-            <i className="material-icons info-icon">info_outline</i>
-            {` issues `}
-          </Link>
-        </h1>
+        {repo.name ?
+          <h1>
+            {repo.name}
+            {` / `}
+            <Link to="/">
+              <i className="material-icons info-icon">info_outline</i>
+              {` issues `}
+            </Link>
+          </h1>
+        : <h1>&nbsp;</h1>}
 
         <PaginationContainer />
 
@@ -87,5 +89,5 @@ export default class Home extends Component {
 Home.propTypes = {
   repo: PropTypes.object.isRequired,
   issues: PropTypes.array.isRequired,
-  isLoading: PropTypes.boolean
+  isLoading: PropTypes.bool
 };

@@ -84,6 +84,6 @@ Issue.propTypes = {
   issue: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
   repo: PropTypes.object.isRequired,
-  isLoading: PropTypes.boolean
+  isLoading: PropTypes.bool
 };
 

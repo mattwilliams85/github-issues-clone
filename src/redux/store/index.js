@@ -11,7 +11,8 @@ const logger = createLogger({
 const applyStore = applyMiddleware(thunk, logger)(createStore);
 
 export default function configureStore(state) {
-  const store = applyStore(reducer, state);
+  const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  const store = applyStore(reducer, devTools, state);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

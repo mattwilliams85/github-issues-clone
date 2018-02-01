@@ -1,61 +1,41 @@
-var webpack = require('webpack');
+// webpack.config.js
+const webpack = require('webpack')
+const path = require('path')
 
-var environments = {
-  development: {
-    context: __dirname + '/src',
-    entry: {
-      javascript: './app.js',
-      html: './index.html',
-    },
-    module: {
-      loaders: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loaders: ['react-hot', 'babel']
-        },
-        {
-          test: /\.html$/,
-          loader: 'file?name=[name].[ext]',
-        }
-      ]
-    },
-    output: {
-      filename: 'app.js',
-      path: __dirname + '/dist',
-    },
-    devServer: {
-      port: 9000
-    }
+const config = {
+  context: path.resolve(__dirname, 'src'),
+  entry: ['./app.js', './index.html' ],
+  output: {
+    filename: 'app.js',
+    path: __dirname + '/dist',
   },
-
-  production: {
-    context: __dirname + '/src',
-    entry: {
-      javascript: './app.js',
-      html: './index.html',
-    },
-    module: {
-      loaders: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loaders: ['babel'],
-        },
-        {
-          test: /\.html$/,
-          loader: 'file?name=[name].[ext]',
+  devServer: {
+    port: 9000
+  },
+  module: {
+    rules: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            ['es2015', { modules: false }]
+          ]
         }
-      ]
+      }]
+    }, {
+      test: /\.scss$/,
+      use: [
+        'style-loader',
+        'css-loader',
+        'sass-loader']
     },
-    plugins: [
-      new webpack.optimize.UglifyJsPlugin({minimize: true})
-    ],
-    output: {
-      filename: 'app.js',
-      path: __dirname + '/dist',
-    }
+      {
+        test: /\.html$/,
+        loader: 'file-loader?name=[name].[ext]',
+      }]
   }
-}
+};
 
-module.exports = environments[process.env.NODE_ENV] || environments.development;
+module.exports = config;

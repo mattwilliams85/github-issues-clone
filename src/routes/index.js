@@ -1,6 +1,13 @@
 import React from 'react';
-import { Route } from 'react-router';
-import Main from '../containers/main';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import AppContainer from '../AppContainer';
+import HomeContainer from '../containers/homeContainer';
+import IssueContainer from '../containers/issueContainer';
 
 export default () =>
-  <Route path="/" component={Main} />;
+  <Router history={browserHistory}>
+    <Route path="/" component={AppContainer}>
+      <IndexRoute component={HomeContainer} />
+      <Route path="/issues/:issueId" component={IssueContainer} />
+    </Route>
+  </Router>;

@@ -4,8 +4,9 @@ import { Provider } from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import configureStore from './redux/store';
 import routes from './routes';
+import './style.scss';
 
-const store = configureStore();
+export const store = configureStore();
 
 ReactDOM.render((
   <Provider store={store}>

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import tinycolor from 'tinycolor2';
+import { Body } from './body'
 
 export class Issue extends Component {
   componentWillMount() {
@@ -9,7 +9,7 @@ export class Issue extends Component {
   }
 
   render() {
-    const { repo, issue, isLoading } = this.props;
+    const { repo, isLoading, issue } = this.props;
     const { title, labels, number, user, body, comments } = issue;
     const { login, avatar_url } = user;
 
@@ -32,38 +32,8 @@ export class Issue extends Component {
               {`/ `}
               <span className="number">#{number}</span>
             </h1>
-            <div className="issue">
-              <div className="title lg">{title}</div>
-              <div className="labels">
-                {labels.map((label) => {
-                  const { color, name } = label;
-                  const isLight = tinycolor(`#${color}`).isLight();
-
-                  return (
-                    <div
-                      key={name} 
-                      style={{ backgroundColor: `#${color }` }}
-                      className={isLight ? 'light' : null}
-                    >
-                      {name}
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="body-wrap">
-                <div>
-                  <img className="gravatar" src={avatar_url} alt="gravatar" />
-                </div>
-                <div>
-                  <div className="bold">#{number} - <span className="link">@{login}</span></div>
-                  <div className="summary">
-                    {body}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            { comments.lengt ? <h3>Comments</h3> : null }
+            <Body {...this.props}/>
+            {comments.length ? <h3>Comments</h3> : null}
             {comments.map((comment, index) => {
               return (
                 <div key={index} className="issue comment">
@@ -81,7 +51,6 @@ export class Issue extends Component {
 }
 
 Issue.propTypes = {
-  issue: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
   repo: PropTypes.object.isRequired,
   isLoading: PropTypes.bool

@@ -74,6 +74,7 @@ a {
 .title {
   font-size: 16px;
   font-weight: bold;
+  overflow: hidden;
 
   &.lg {
     font-size: 26px;
@@ -143,6 +144,15 @@ a {
   .hidden-button {
     width: 70px;
   }
+}
+
+.summary {
+  p, pre, code, img {
+    max-width: 500px;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+  
 }
 
 .mask {

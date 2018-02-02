@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Body } from './body'
+import marked from 'marked';
+import tinycolor from 'tinycolor2';
+
 
 export class Issue extends Component {
   componentWillMount() {
@@ -32,7 +34,32 @@ export class Issue extends Component {
               {`/ `}
               <span className="number">#{number}</span>
             </h1>
-            <Body {...this.props}/>
+            <div className="issue">
+              <div className="title lg">{title}</div>
+              <div className="labels">
+                {labels.map((label) => {
+                  const { color, name } = label;
+                  const isLight = tinycolor(`#${color}`).isLight();
+
+                  return (
+                    <div key={name} style={{ backgroundColor: `#${color}` }} className={isLight ? 'light' : null}>
+                      {name}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="body-wrap">
+                <div>
+                  <img className="gravatar" src={avatar_url} alt="gravatar" />
+                </div>
+                <div>
+                  <div className="bold">#{number} - <span className="link">@{login}</span></div>
+                  <div className="summary">
+                    <div dangerouslySetInnerHTML={{ __html: marked(body) }} />
+                  </div>
+                </div>
+              </div>
+            </div>
             {comments.length ? <h3>Comments</h3> : null}
             {comments.map((comment, index) => {
               return (
